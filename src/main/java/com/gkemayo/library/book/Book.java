@@ -61,7 +61,6 @@ public class Book {
 		this.title = title;
 	}
 
-	//@NotEmpty
 	@Column(name = "ISBN", nullable = false, unique = true)
 	public String getIsbn() {
 		return isbn;

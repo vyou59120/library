@@ -46,6 +46,11 @@ public class CustomerRestController {
 	@Autowired
 	private JavaMailSender javaMailSender;
 
+	/**
+	 * Ajoute un nouveau client dans la base de donnée H2. Si le client existe déjà, on retourne un code indiquant que la création n'a pas abouti.
+	 * @param customerDTORequest
+	 * @return
+	 */
 	@PostMapping("/addCustomer")
 	@ApiOperation(value = "Add a new Customer in the Library", response = CustomerDTO.class)
 	@ApiResponses(value = { @ApiResponse(code = 409, message = "Conflict: the customer already exist"),
@@ -68,6 +73,11 @@ public class CustomerRestController {
 
 	}
 
+	/**
+	 * Met à jour les données d'un client dans la base de donnée H2. Si le client n'est pas retrouvé, on retourne un code indiquant que la mise à jour n'a pas abouti.
+	 * @param customerDTORequest
+	 * @return
+	 */
 	@PutMapping("/updateCustomer")
 	@ApiOperation(value = "Update/Modify an existing customer in the Library", response = CustomerDTO.class)
 	@ApiResponses(value = { @ApiResponse(code = 404, message = "Not Found : the customer does not exist"),
@@ -87,6 +97,11 @@ public class CustomerRestController {
 		return new ResponseEntity<CustomerDTO>(HttpStatus.NOT_MODIFIED);
 	}
 
+	/**
+	 * Supprime un client dans la base de donnée H2. Si le client n'est pas retrouvé, on retourne le Statut HTTP NO_CONTENT.
+	 * @param customerId
+	 * @return
+	 */
 	@DeleteMapping("/deleteCustomer/{customerId}")
 	@ApiOperation(value = "Delete a customer in the Library, if the customer does not exist, nothing is done", response = String.class)
 	@ApiResponse(code = 204, message = "No Content: customer sucessfully deleted")
@@ -114,6 +129,11 @@ public class CustomerRestController {
 		return new ResponseEntity<List<CustomerDTO>>(HttpStatus.NO_CONTENT);
 	}
 
+	/**
+	 * Retourne le client ayant l'adresse email passé en paramètre.
+	 * @param email
+	 * @return
+	 */
 	@GetMapping("/searchByEmail")
 	@ApiOperation(value="Search a customer in the Library by its email", response = CustomerDTO.class)
 	@ApiResponses(value = {
@@ -130,6 +150,11 @@ public class CustomerRestController {
 		return new ResponseEntity<CustomerDTO>(HttpStatus.NO_CONTENT);
 	}
 	
+	/**
+	 * Retourne la liste des clients ayant le nom passé en paramètre.
+	 * @param lastName
+	 * @return
+	 */
 	@GetMapping("/searchByLastName")
 	@ApiOperation(value="Search a customer in the Library by its Last name", response = List.class)
 	@ApiResponses(value = {
@@ -148,6 +173,12 @@ public class CustomerRestController {
 		return new ResponseEntity<List<CustomerDTO>>(HttpStatus.NO_CONTENT);
 	}
 	
+	/**
+	 * Envoi un mail à un client. L'objet MailDTO contient l'identifiant et l'email du client concerné, l'objet du mail et le contenu du message.
+	 * @param loanMailDto
+	 * @param uriComponentBuilder
+	 * @return
+	 */
 	@PutMapping("/sendEmailToCustomer")
 	@ApiOperation(value="Send an email to customer of the Library", response = String.class)
 	@ApiResponses(value = {
@@ -185,7 +216,7 @@ public class CustomerRestController {
 	}
 
 	/**
-	 * Transforme un Customer en CustomerDTO
+	 * Transforme un entity Customer en un POJO CustomerDTO
 	 * 
 	 * @param customer
 	 * @return
@@ -197,7 +228,7 @@ public class CustomerRestController {
 	}
 
 	/**
-	 * Transforme un CustomerDTO en Customer
+	 * Transforme un POJO CustomerDTO en en entity Customer
 	 * 
 	 * @param customerDTO
 	 * @return

@@ -40,6 +40,11 @@ public class LoanRestController {
 	@Autowired
 	private LoanServiceImpl loanService;
 
+	/**
+	 * Retourne l'historique des prêts en cours dans la bibliothèque jusqu'à une certaine date maximale. 
+	 * @param maxEndDateStr
+	 * @return
+	 */
 	@GetMapping("/maxEndDate")
 	@ApiOperation(value="List loans realized before the indicated date", response = List.class)
 	@ApiResponse(code = 200, message = "Ok: successfully listed")
@@ -51,6 +56,11 @@ public class LoanRestController {
 		return new ResponseEntity<List<LoanDTO>>(loanInfosDtos, HttpStatus.OK);
 	}
 	
+	/**
+	 * Retourne la liste des prêts en cours d'un client. 
+	 * @param email
+	 * @return
+	 */
 	@GetMapping("/customerLoans")
 	@ApiOperation(value="List loans realized before the indicated date", response = List.class)
 	@ApiResponse(code = 200, message = "Ok: successfully listed")
@@ -62,6 +72,12 @@ public class LoanRestController {
 		return new ResponseEntity<List<LoanDTO>>(loanInfosDtos, HttpStatus.OK);
 	}
 	
+	/**
+	 * Ajoute un nouveau prêt dans la base de données H2.
+	 * @param simpleLoanDTORequest
+	 * @param uriComponentBuilder
+	 * @return
+	 */
 	@PostMapping("/addLoan")
 	@ApiOperation(value = "Add a new Loan in the Library", response = LoanDTO.class)
 	@ApiResponses(value = { @ApiResponse(code = 409, message = "Conflict: the loan already exist"),
@@ -82,6 +98,12 @@ public class LoanRestController {
 
 	}
 	
+	/**
+	 * Cloture le prêt de livre d'un client.
+	 * @param simpleLoanDTORequest
+	 * @param uriComponentBuilder
+	 * @return
+	 */
 	@PostMapping("/closeLoan")
 	@ApiOperation(value = "Marks as close a Loan in the Library", response = Boolean.class)
 	@ApiResponses(value = { @ApiResponse(code = 204, message = "No Content: no loan founded"),

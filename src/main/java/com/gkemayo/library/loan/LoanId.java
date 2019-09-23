@@ -39,8 +39,6 @@ public class LoanId implements Serializable {
 	}
 
 	@ManyToOne
-	//(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	//@JoinColumn(name = "BOOK_ID", referencedColumnName = "BOOK_ID")
 	public Book getBook() {
 		return book;
 	}
@@ -50,8 +48,6 @@ public class LoanId implements Serializable {
 	}
 
 	@ManyToOne
-	//(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	//@JoinColumn(name = "CUSTOMER_ID", referencedColumnName = "CUSTOMER_ID")
 	public Customer getCustomer() {
 		return customer;
 	}

@@ -14,7 +14,7 @@ public interface IBookService {
 	
 	public Book findBookByIsbn(String isbn);
 	
-	public boolean checkIfIdexists(Integer id);
+	public boolean checkIfIdExists(Integer id);
 	
 	public List<Book> getBooksByCategory(String codeCategory);
 

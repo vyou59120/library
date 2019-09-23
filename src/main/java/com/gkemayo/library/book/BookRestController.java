@@ -69,7 +69,7 @@ public class BookRestController {
 			@ApiResponse(code = 304, message = "Not Modified: the book is unsuccessfully updated") })
 	public ResponseEntity<BookDTO> updateBook(@RequestBody BookDTO bookDTORequest) {
 		//, UriComponentsBuilder uriComponentBuilder
-		if (!bookService.checkIfIdexists(bookDTORequest.getId())) {
+		if (!bookService.checkIfIdExists(bookDTORequest.getId())) {
 			return new ResponseEntity<BookDTO>(HttpStatus.NOT_FOUND);
 		}
 		Book bookRequest = mapBookDTOToBook(bookDTORequest);

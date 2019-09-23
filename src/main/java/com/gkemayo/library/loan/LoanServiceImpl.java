@@ -44,7 +44,7 @@ public class LoanServiceImpl implements ILoanService {
 	}
 	
 	/**
-	 * On fera de la suppression logique
+	 * On fera de la suppression logique car le statut de l'objet Loan est positionné à CLOSE.
 	 */
 	@Override
 	public void closeLoan(Loan loan) {

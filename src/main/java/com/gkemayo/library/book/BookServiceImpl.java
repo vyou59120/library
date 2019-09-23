@@ -29,7 +29,7 @@ public class BookServiceImpl implements IBookService {
 	}
 
 	@Override
-	public boolean checkIfIdexists(Integer id) {
+	public boolean checkIfIdExists(Integer id) {
 		return bookDao.existsById(id);
 	}
 
